@@ -1,22 +1,17 @@
-import { NativeModules, Platform } from 'react-native';
+import { DeviceEventEmitter, Platform } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'react-native-key-event-listener' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo Go\n';
+let listenerKeyDown: any;
 
-const KeyEventListener = NativeModules.KeyEventListener
-  ? NativeModules.KeyEventListener
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+export function onKeyDownListener(cb: any) {
+  removeKeyDownListener();
+  if (Platform.OS !== "ios") {
+    listenerKeyDown = DeviceEventEmitter.addListener('onKeyDown', cb);
+  }
+}
 
-export function multiply(a: number, b: number): Promise<number> {
-  return KeyEventListener.multiply(a, b);
+function removeKeyDownListener() {
+  if (listenerKeyDown) {
+    listenerKeyDown.remove();
+    listenerKeyDown = null;
+  }
 }

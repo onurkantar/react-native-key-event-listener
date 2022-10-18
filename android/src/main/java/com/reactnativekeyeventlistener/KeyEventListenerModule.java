@@ -11,6 +11,16 @@ import com.facebook.react.module.annotations.ReactModule;
 @ReactModule(name = KeyEventListenerModule.NAME)
 public class KeyEventListenerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "KeyEventListener";
+    private static KeyEventModule instance = null;
+
+    public static KeyEventModule initKeyEventModule(ReactApplicationContext reactContext) {
+        instance = new KeyEventModule(reactContext);
+        return instance;
+    }
+
+    public static KeyEventModule getInstance() {
+        return instance;
+    }
 
     public KeyEventListenerModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -22,12 +32,37 @@ public class KeyEventListenerModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
+    public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
+        if (!mReactContext.hasActiveCatalystInstance()) {
+            return;
+        }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    public void multiply(double a, double b, Promise promise) {
-        promise.resolve(a * b);
+        if (mJSModule == null) {
+            mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+        }
+        mJSModule.emit("onKeyDown", getJsEventParams(keyCode, keyEvent, null));
+    };
+
+     private WritableMap getJsEventParams(int keyCode, KeyEvent keyEvent, Integer repeatCount) {
+        WritableMap params = new WritableNativeMap();
+        int action = keyEvent.getAction();
+        char pressedKey = (char) keyEvent.getUnicodeChar();
+
+        if (keyEvent.getAction() == KeyEvent.ACTION_MULTIPLE && keyCode == KeyEvent.KEYCODE_UNKNOWN) {
+            String chars = keyEvent.getCharacters();
+            if (chars != null) {
+                params.putString("characters", chars);
+            }
+        }
+
+        if (repeatCount != null) {
+            params.putInt("repeatcount", repeatCount);
+        }
+
+        params.putInt("keyCode", keyCode);
+        params.putInt("action", action);
+        params.putString("pressedKey", String.valueOf(pressedKey));
+
+        return params;
     }
-
 }
