@@ -4,12 +4,12 @@ let listenerKeyDown: any;
 
 export function onKeyDownListener(cb: any) {
   removeKeyDownListener();
-  if (Platform.OS !== "ios") {
+  if (Platform.OS !== 'ios') {
     listenerKeyDown = DeviceEventEmitter.addListener('onKeyDown', cb);
   }
 }
 
-function removeKeyDownListener() {
+export function removeKeyDownListener() {
   if (listenerKeyDown) {
     listenerKeyDown.remove();
     listenerKeyDown = null;
