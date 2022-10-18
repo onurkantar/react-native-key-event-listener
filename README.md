@@ -9,11 +9,23 @@ npm install react-native-key-event-listener
 ## Usage
 
 ```js
-import { multiply } from "react-native-key-event-listener";
+import { KeyEvent  } from "react-native-key-event-listener";
 
 // ...
 
-const result = await multiply(3, 7);
+componentDidMount() {
+    // if you want to react to keyDown
+    KeyEvent.onKeyDownListener((keyEvent) => {
+      console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
+      console.log(`Action: ${keyEvent.action}`);
+      console.log(`Key: ${keyEvent.pressedKey}`);
+    });
+}
+
+componentWillUnmount() {
+    // if you are listening to keyDown
+    KeyEvent.removeKeyDownListener();
+}
 ```
 
 ## Contributing
