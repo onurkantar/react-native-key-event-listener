@@ -8,6 +8,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 
+import android.view.KeyEvent;
+
 @ReactModule(name = KeyEventListenerModule.NAME)
 public class KeyEventListenerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "KeyEventListener";

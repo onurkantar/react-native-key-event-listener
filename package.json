@@ -1,6 +1,6 @@
 {
-  "name": "react-native-key-event-listener",
-  "version": "0.1.0",
+  "name": "@onurkantar/react-native-key-event-listener",
+  "version": "0.1.1",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
