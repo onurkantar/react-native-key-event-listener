@@ -18,14 +18,14 @@ import android.view.KeyEvent;
 @ReactModule(name = KeyEventListenerModule.NAME)
 public class KeyEventListenerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "KeyEventListener";
-    private static KeyEventModule instance = null;
+    private static KeyEventListenerModule instance = null;
 
-    public static KeyEventModule initKeyEventModule(ReactApplicationContext reactContext) {
-        instance = new KeyEventModule(reactContext);
+    public static KeyEventListenerModule initKeyEventModule(ReactApplicationContext reactContext) {
+        instance = new KeyEventListenerModule(reactContext);
         return instance;
     }
 
-    public static KeyEventModule getInstance() {
+    public static KeyEventListenerModule getInstance() {
         return instance;
     }
 
