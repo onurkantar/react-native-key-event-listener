@@ -18,6 +18,9 @@ import android.view.KeyEvent;
 @ReactModule(name = KeyEventListenerModule.NAME)
 public class KeyEventListenerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "KeyEventListener";
+    
+    private ReactContext mReactContext;
+    private DeviceEventManagerModule.RCTDeviceEventEmitter mJSModule = null;
     private static KeyEventListenerModule instance = null;
 
     public static KeyEventListenerModule initKeyEventModule(ReactApplicationContext reactContext) {
@@ -31,6 +34,7 @@ public class KeyEventListenerModule extends ReactContextBaseJavaModule {
 
     public KeyEventListenerModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        mReactContext = reactContext;
     }
 
     @Override
