@@ -16,7 +16,7 @@ public class KeyEventListenerPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new KeyEventListenerModule.initKeyEventModule(reactContext));
+        modules.add(KeyEventListenerModule.initKeyEventModule(reactContext));
         return modules;
     }
 
