@@ -9,7 +9,7 @@ npm install react-native-key-event-listener
 ## Usage
 
 ```js
-import { KeyEvent  } from "react-native-key-event-listener";
+import { KeyEvent  } from "@onurkantar/react-native-key-event-listener";
 
 // ...
 
